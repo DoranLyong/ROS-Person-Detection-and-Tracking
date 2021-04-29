@@ -56,6 +56,7 @@ except:
     
 
 FLAGS = YOLO_CFG(cfg)
+print(vars(FLAGS)) #(ref) https://stackoverflow.com/questions/3992803/print-all-variables-in-a-class-python
 
 GALLERY_DIR = cfg['dataPath']['GALLERY_IMG_DIR']
 CAPTURE_NUM = cfg['OPTIONS']['NUM_IMG']
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
-#    YOLO_INFER(ConfigProto, InteractiveSession)
-    print(vars(FLAGS)) #(ref) https://stackoverflow.com/questions/3992803/print-all-variables-in-a-class-python
+    YOLO_INFER(ConfigProto, InteractiveSession, FLAGS)
+
 
     
