@@ -24,7 +24,7 @@ from tensorflow.compat.v1 import InteractiveSession
 import core.utils as utils
 from core.yolov4 import filter_boxes
 from yolo_utils import (YOLO_INFER, 
-                        YOLO_CFG,
+                        YOLO_FLAGS,
 
                         )
 
@@ -55,7 +55,7 @@ except:
     sys.exit("fail to load YAML...")
     
 
-FLAGS = YOLO_CFG(cfg)
+FLAGS = YOLO_FLAGS(cfg)
 print(vars(FLAGS)) #(ref) https://stackoverflow.com/questions/3992803/print-all-variables-in-a-class-python
 
 GALLERY_DIR = cfg['dataPath']['GALLERY_IMG_DIR']

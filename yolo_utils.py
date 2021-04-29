@@ -42,7 +42,7 @@ class YOLO_INFER(object):
 
 
 #%%
-class YOLO_CFG(object):
+class YOLO_FLAGS(object):
     def __init__(self, cfg):
         self.framework = cfg['YOLO4_TINY']['FRAMEWORK']
         self.weights = cfg['YOLO4_TINY']['WEIGHTS']
