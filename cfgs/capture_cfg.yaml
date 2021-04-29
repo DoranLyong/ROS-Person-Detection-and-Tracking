@@ -1,0 +1,18 @@
+OPTIONS:
+  NUM_IMG : 100 # the number of images for capturing 
+  FILE_NAME : 'patient'  # target name 
+  
+
+
+YOLO4_TINY:
+  FRAMEWORK : 'tflite'
+  WEIGHTS : 'checkpoints/yolov4-tiny-416.tflite'  # path to weights file 
+  SIZE: 416  # resize images to 
+  MODEL: 'yolov4'
+  IoU : 0.45  # iou threshold 
+  SCORE : 0.75  # threshold 
+  TINY : true   # 'yolo-tiny moodel'
+
+
+dataPath:
+  GALLERY_IMG_DIR : 'data/IMGs/gallery'
