@@ -1,6 +1,20 @@
-# Person Detection and Tracking (Python)
+# Person Detection and Tracking (Python) - onging 
 
 
+### 1, Pedestrain sample capture 
+```bash 
+~$ python capture_user_samples.py
+```
+* Only ```one person``` should be captured during this process.
+* If more than one person is captured, it is recommended to retake.
+
+<br/>
+
+### 2. ID enrollment 
+
+
+
+### 3. Pedestrain recognition 
 
 
 

@@ -10,6 +10,7 @@ import sys
 import os 
 import os.path as osp 
 from pathlib import Path 
+from glob import glob
 
 
 import cv2 
@@ -59,9 +60,9 @@ except:
 FLAGS = CFG_FLAGS(cfg)
 print(vars(FLAGS)) #(ref) https://stackoverflow.com/questions/3992803/print-all-variables-in-a-class-python
 
-GALLERY_DIR = cfg['dataPath']['GALLERY_IMG_DIR']
-CAPTURE_NUM = cfg['OPTIONS']['NUM_IMG']
-TARGET_NAME = cfg['OPTIONS']['FILE_NAME']
+GALLERY_DIR = cfg['CAPTURE_OPTIONS']['dataPath']['GALLERY_IMG_DIR']
+CAPTURE_NUM = cfg['CAPTURE_OPTIONS']['NUM_IMG']
+TARGET_NAME = cfg['CAPTURE_OPTIONS']['FILE_NAME']
 CAM_NUM = cfg['CAMERA']['NUM']
 
 
@@ -81,9 +82,29 @@ else:
 
 
 
+def check_existdir(path):
+    file_list = os.listdir(path)
+
+    if len(file_list): 
+        file_list.sort()
+        frame_num = file_list[-1].split('.')[0].split('_')[-1]
+        print(f'{Back.RED}Previous captured frame number:{Style.RESET_ALL} {frame_num}')
+        
+        return int(frame_num) + 1
+
+
+    print(f"{Back.GREEN}No previous works{Style.RESET_ALL}")
+    return 0 
+
+
+
 
 def run(yolo_module, vid):
-    frame_id = 0 
+    
+    path = f'{GALLERY_DIR}/{TARGET_NAME}'
+    frame_id = check_existdir(path)   # return starting frame number 
+    print(f"Start frame ID at :{frame_id }")    
+    frame_count = 0 
 
     while True:
         return_value, frame  = vid.read()
@@ -93,8 +114,6 @@ def run(yolo_module, vid):
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image = Image.fromarray(frame)
 
-#            cv2.imshow("VideoFrame_original", frame)
-
 
         else: 
             raise ValueError("No image! Try with another video format")
@@ -102,7 +121,32 @@ def run(yolo_module, vid):
         
         """ Inference 
         """
-        yolo_module(frame)
+        bbox_list = yolo_module(frame)
+#        print(f"num of bboxes: {len(bbox_list)}")
+
+        if len(bbox_list):  # if not empty bbox 
+            
+            for bbox in bbox_list:
+            
+                x1, y1, x2, y2 = bbox
+
+                RoI = image.crop((x1, y1, x2, y2))
+                RoI.save(f'{GALLERY_DIR}/{TARGET_NAME}/{TARGET_NAME}_{frame_id:04}.jpg') #(ref) https://brownbears.tistory.com/483
+
+
+                frame_count += 1
+                frame_id += 1 
+                print(f"{frame_count}/{CAPTURE_NUM}")
+
+                
+                if frame_count >= CAPTURE_NUM: 
+                    
+                    vid.release()
+                    cv2.destroyAllWindows()                    
+                    sys.exit("Storing is done... (+ _ +)v")
+
+                
+
         if cv2.waitKey(1) & 0xFF == ord('q'): break  
 
     vid.release()
@@ -114,7 +158,7 @@ if __name__ == "__main__":
 
     """ Make a directory for gallery 
     """
-    DATA_DIR = Path(GALLERY_DIR)
+    DATA_DIR = Path(osp.join(GALLERY_DIR, TARGET_NAME ))
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 

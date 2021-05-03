@@ -141,7 +141,7 @@ class YOLO_INFER(object):
 
         if self.count:
             cv2.putText(input_frame, "Objects being tracked: {}".format(count), (5, 35), cv2.FONT_HERSHEY_COMPLEX_SMALL, 2, (0, 255, 0), 2)
-            print(f"Objects being tracked: {count}")
+#            print(f"Objects being tracked: {count}")
             
 
         # encode yolo detections and feed to tracker
@@ -167,6 +167,8 @@ class YOLO_INFER(object):
         self.DeepSORT_tracker.update(detections)
 
         # update tracks
+        bbox_list = []
+
         for track in self.DeepSORT_tracker.tracks:
             if not track.is_confirmed() or track.time_since_update > 1:
                 continue 
@@ -181,6 +183,7 @@ class YOLO_INFER(object):
             cv2.rectangle(input_frame, (int(bbox[0]), int(bbox[1]-30)), (int(bbox[0])+(len(class_name)+len(str(track.track_id)))*17, int(bbox[1])), color, -1)
             cv2.putText(input_frame, class_name + "-" + str(track.track_id),(int(bbox[0]), int(bbox[1]-10)),0, 0.75, (255,255,255),2)
 
+            bbox_list.append((int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))) # (x1, y1, x2, y2)
 
 
             # if enable info flag then print details about each track
@@ -189,7 +192,7 @@ class YOLO_INFER(object):
 
         # calculate frames per second of running detections
         fps = 1.0 / (time.time() - prev_time) # stop-watch off 
-        print(f"FPS: {fps:.2f}")        
+#        print(f"FPS: {fps:.2f}")        
 
         result = np.asarray(input_frame)
         result = cv2.cvtColor(input_frame, cv2.COLOR_RGB2BGR)         
@@ -197,6 +200,9 @@ class YOLO_INFER(object):
 
         if not self.dont_show :    
             cv2.imshow("Output", result)   
+
+
+        return bbox_list
             
 
 

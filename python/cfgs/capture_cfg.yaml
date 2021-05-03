@@ -1,6 +1,9 @@
-OPTIONS:
+CAPTURE_OPTIONS:
   NUM_IMG : 100 # the number of images for capturing 
   FILE_NAME : 'patient'  # target name 
+
+  dataPath:
+    GALLERY_IMG_DIR : 'data/IMGs/gallery' 
   
 
 
@@ -18,13 +21,12 @@ DeepSORT:
   MAX_COSINE_DISTANCE : 0.4
   NN_BUDGET : null
   NMS_MAX_OVERLAP : 1.0
-  COUNT: False   # 'count objects being tracked on screen'
+  COUNT: True   # 'count objects being tracked on screen'
   INFO: False    # 'show detailed info of tracked objects'
   DONT_SHOW : False # 'dont show video output'
 
 
-dataPath:
-  GALLERY_IMG_DIR : 'data/IMGs/gallery'
+
 
 
 CAMERA:
