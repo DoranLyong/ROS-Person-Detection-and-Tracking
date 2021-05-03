@@ -86,7 +86,7 @@ def check_existdir(path):
     file_list = os.listdir(path)
 
     if len(file_list): 
-        file_list.sort()
+        file_list.sort()   #(ref) https://wikidocs.net/16041
         frame_num = file_list[-1].split('.')[0].split('_')[-1]
         print(f'{Back.RED}Previous captured frame number:{Style.RESET_ALL} {frame_num}')
         
