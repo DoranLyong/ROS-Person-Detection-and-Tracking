@@ -1,6 +1,6 @@
 CAPTURE_OPTIONS:
   NUM_IMG : 100 # the number of images for capturing 
-  FILE_NAME : 'patient'  # target name 
+  FILE_NAME : 'GJ'  # target name 
 
   dataPath:
     GALLERY_IMG_DIR : 'data/IMGs/gallery' 
