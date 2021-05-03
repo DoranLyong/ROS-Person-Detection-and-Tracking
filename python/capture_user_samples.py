@@ -14,6 +14,7 @@ from pathlib import Path
 
 import cv2 
 import numpy as np 
+from PIL import Image  # for TensorFlow & PyTorch
 import yaml  # (ref) https://pyyaml.org/wiki/PyYAMLDocumentation
 from colorama import Back, Style # assign color options on your text(ref) https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal
 import tensorflow as tf 
@@ -24,7 +25,7 @@ from tensorflow.compat.v1 import InteractiveSession
 import core.utils as utils
 from core.yolov4 import filter_boxes
 from yolo_utils import (YOLO_INFER, 
-                        YOLO_FLAGS,
+                        CFG_FLAGS,
 
                         )
 
@@ -55,12 +56,13 @@ except:
     sys.exit("fail to load YAML...")
     
 
-FLAGS = YOLO_FLAGS(cfg)
+FLAGS = CFG_FLAGS(cfg)
 print(vars(FLAGS)) #(ref) https://stackoverflow.com/questions/3992803/print-all-variables-in-a-class-python
 
 GALLERY_DIR = cfg['dataPath']['GALLERY_IMG_DIR']
 CAPTURE_NUM = cfg['OPTIONS']['NUM_IMG']
 TARGET_NAME = cfg['OPTIONS']['FILE_NAME']
+CAM_NUM = cfg['CAMERA']['NUM']
 
 
 
@@ -80,7 +82,31 @@ else:
 
 
 
+def run(yolo_module, vid):
+    frame_id = 0 
 
+    while True:
+        return_value, frame  = vid.read()
+
+
+        if return_value:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            image = Image.fromarray(frame)
+
+#            cv2.imshow("VideoFrame_original", frame)
+
+
+        else: 
+            raise ValueError("No image! Try with another video format")
+
+        
+        """ Inference 
+        """
+        yolo_module(frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'): break  
+
+    vid.release()
+    cv2.destroyAllWindows()
 
 
 #%%
@@ -92,7 +118,26 @@ if __name__ == "__main__":
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
-    YOLO_INFER(ConfigProto, InteractiveSession, FLAGS)
+    """ init. the detector-tracker module 
+    """
+    yolo_module = YOLO_INFER(ConfigProto, InteractiveSession, FLAGS)
+
+
+    """ init. camera object 
+    """
+    vid = cv2.VideoCapture(CAM_NUM)   # (ref) https://076923.github.io/posts/Python-opencv-2/
+    vid.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
+
+    """ Run!!!
+    """ 
+    run(yolo_module, vid)
+
+
+
+
+
 
 
     

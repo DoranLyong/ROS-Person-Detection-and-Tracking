@@ -1,4 +1,4 @@
-# ROS-Person-Detection-and-Tracking (ongoing...)
+# Person Detection and Tracking (Python)
 
 
 

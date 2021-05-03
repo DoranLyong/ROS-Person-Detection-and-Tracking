@@ -13,6 +13,19 @@ YOLO4_TINY:
   SCORE : 0.75  # threshold 
   TINY : true   # 'yolo-tiny moodel'
 
+DeepSORT:
+  WEIGHTS : 'DeepSORT_data/mars-small128.pb'
+  MAX_COSINE_DISTANCE : 0.4
+  NN_BUDGET : null
+  NMS_MAX_OVERLAP : 1.0
+  COUNT: False   # 'count objects being tracked on screen'
+  INFO: False    # 'show detailed info of tracked objects'
+  DONT_SHOW : False # 'dont show video output'
+
 
 dataPath:
   GALLERY_IMG_DIR : 'data/IMGs/gallery'
+
+
+CAMERA:
+  NUM : 0  # camera device number 
