@@ -7,6 +7,8 @@
 ```
 * Only ```one person``` should be captured during this process.
 * If more than one person is captured, it is recommended to retake.
+* You can change the target person ID by editing ```FILE_NAME ``` in ```cfgs/capture_cfg.yaml```
+    * don't use [underscore](https://en.wikipedia.org/wiki/Underscore) ('_') for naming ID
 
 <br/>
 
