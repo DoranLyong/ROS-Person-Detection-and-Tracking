@@ -1,26 +1,13 @@
-# Person Detection and Tracking (Python) - onging 
+# Person Detection and Tracking (ROS) - onging 
 
 ### Install requirements
-```bash
-~$ pip install --upgrade -r requirements.txt
-```
 
 
 ### 1. Pedestrain sample capture 
-```bash 
-~$ python capture_user_samples.py
-```
-* Only ```one person``` should be captured during this process.
-* If more than one person is captured, it is recommended to retake.
-* You can change the target person ID by editing ```FILE_NAME ``` in ```cfgs/capture_cfg.yaml```
-    * don't use [underscore](https://en.wikipedia.org/wiki/Underscore) ('_') for naming ID
 
 <br/>
 
 ### 2. ID enrollment 
-```bash 
-~$ enrollment_persons.py
-``` 
 
 
 

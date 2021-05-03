@@ -1,9 +1,9 @@
 colorama
 PyYAML
 opencv-python
-lxml==4.6.3
-tqdm==4.60.0
+lxml
+tqdm
 tensorflow==2.3.0rc0
-easydict==1.9
-matplotlib==3.4.1
+easydict
+matplotlib
 pillow
