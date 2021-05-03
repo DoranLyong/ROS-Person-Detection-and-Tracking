@@ -131,7 +131,9 @@ def run(yolo_module, vid):
                 x1, y1, x2, y2 = bbox
 
                 RoI = image.crop((x1, y1, x2, y2))
-                RoI.save(f'{GALLERY_DIR}/{TARGET_NAME}/{TARGET_NAME}_{frame_id:04}.jpg') #(ref) https://brownbears.tistory.com/483
+                img_resize = RoI.resize((64, 128))  # (ref) https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize
+                                                    # for ReID model infernce; (ref) https://github.com/DoranLyong/person-reid-tiny-baseline
+                img_resize.save(f'{GALLERY_DIR}/{TARGET_NAME}/{TARGET_NAME}_{frame_id:04}.png') #(ref) https://brownbears.tistory.com/483
 
 
                 frame_count += 1
