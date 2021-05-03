@@ -1,7 +1,12 @@
 # Person Detection and Tracking (Python) - onging 
 
+### Install requirements
+```bash
+~$ pip install --upgrade requirements.txt
+```
 
-### 1, Pedestrain sample capture 
+
+### 1. Pedestrain sample capture 
 ```bash 
 ~$ python capture_user_samples.py
 ```
