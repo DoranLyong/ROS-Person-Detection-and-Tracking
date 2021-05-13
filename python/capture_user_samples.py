@@ -62,8 +62,11 @@ print(vars(FLAGS)) #(ref) https://stackoverflow.com/questions/3992803/print-all-
 
 GALLERY_DIR = cfg['CAPTURE_OPTIONS']['dataPath']['GALLERY_IMG_DIR']
 CAPTURE_NUM = cfg['CAPTURE_OPTIONS']['NUM_IMG']
+PID = cfg['CAPTURE_OPTIONS']['PID']  # # person ID = target ID 
 TARGET_NAME = cfg['CAPTURE_OPTIONS']['FILE_NAME']
-CAM_NUM = cfg['CAMERA']['NUM']
+TYPE = cfg['CAPTURE_OPTIONS']['TYPE']
+
+CAM_NUM = cfg['CAMERA']['NUM']  # webcam device number 
 
 
 
@@ -101,7 +104,7 @@ def check_existdir(path):
 
 def run(yolo_module, vid):
     
-    path = f'{GALLERY_DIR}/{TARGET_NAME}'
+    path = f'{GALLERY_DIR}'
     frame_id = check_existdir(path)   # return starting frame number 
     print(f"Start frame ID at :{frame_id }")    
     frame_count = 0 
@@ -121,7 +124,7 @@ def run(yolo_module, vid):
         
         """ Inference 
         """
-        bbox_list = yolo_module(frame)
+        bbox_list, _ = yolo_module(frame)
 #        print(f"num of bboxes: {len(bbox_list)}")
 
         if len(bbox_list):  # if not empty bbox 
@@ -133,7 +136,7 @@ def run(yolo_module, vid):
                 RoI = image.crop((x1, y1, x2, y2))
                 img_resize = RoI.resize((64, 128))  # (ref) https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize
                                                     # for ReID model infernce; (ref) https://github.com/DoranLyong/person-reid-tiny-baseline
-                img_resize.save(f'{GALLERY_DIR}/{TARGET_NAME}/{TARGET_NAME}_{frame_id:04}.png') #(ref) https://brownbears.tistory.com/483
+                img_resize.save(f'{GALLERY_DIR}/{PID:04}_c{TARGET_NAME}_{TYPE}_{frame_id:04}.png') #(ref) https://brownbears.tistory.com/483
 
 
                 frame_count += 1
@@ -160,7 +163,7 @@ if __name__ == "__main__":
 
     """ Make a directory for gallery 
     """
-    DATA_DIR = Path(osp.join(GALLERY_DIR, TARGET_NAME ))
+    DATA_DIR = Path(osp.join( f'{GALLERY_DIR}' ))
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 

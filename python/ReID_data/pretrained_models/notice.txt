@@ -1,0 +1,4 @@
+Save the pretrained weights, 'resnet50_person_reid_128x64.pth', in this directory.
+
+download link: 
+    - https://drive.google.com/file/d/16RmXYOx06tIYfiAF9ej2iFn8SXKyCgbF/view?usp=sharing

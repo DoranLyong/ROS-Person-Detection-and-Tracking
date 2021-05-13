@@ -168,6 +168,7 @@ class YOLO_INFER(object):
 
         # update tracks
         bbox_list = []
+        id_list = []
 
         for track in self.DeepSORT_tracker.tracks:
             if not track.is_confirmed() or track.time_since_update > 1:
@@ -184,6 +185,7 @@ class YOLO_INFER(object):
             cv2.putText(input_frame, class_name + "-" + str(track.track_id),(int(bbox[0]), int(bbox[1]-10)),0, 0.75, (255,255,255),2)
 
             bbox_list.append((int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))) # (x1, y1, x2, y2)
+            id_list.append(track.track_id)
 
 
             # if enable info flag then print details about each track
@@ -202,7 +204,7 @@ class YOLO_INFER(object):
             cv2.imshow("Output", result)   
 
 
-        return bbox_list
+        return bbox_list, id_list
             
 
 
