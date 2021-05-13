@@ -23,8 +23,11 @@
 ``` 
 
 
-
 ### 3. Pedestrain recognition 
+```bash 
+~$ python run_person_detector.py     # the main running code 
+~$ python reid_test.py               # for checking reid module 
+```
 
 
 

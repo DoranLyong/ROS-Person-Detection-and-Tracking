@@ -6,9 +6,9 @@ This code is for enrolling the appearance descriptors for gallery items
 import sys 
 import os 
 import os.path as osp 
+import re  # regular expression (ref) https://greeksharifa.github.io/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D(re)/2018/07/20/regex-usage-01-basic/
 
 from tqdm import tqdm
-import re  # regular expression (ref) https://greeksharifa.github.io/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D(re)/2018/07/20/regex-usage-01-basic/
 from PIL import Image
 import cv2
 import numpy as np 

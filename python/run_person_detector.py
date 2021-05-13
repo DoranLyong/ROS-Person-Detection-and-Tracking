@@ -13,9 +13,8 @@ import os.path as osp
 from pathlib import Path 
 from glob import glob
 import itertools
-
-
 import re  # regular expression (ref) https://greeksharifa.github.io/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D(re)/2018/07/20/regex-usage-01-basic/
+
 import cv2 
 import numpy as np 
 import matplotlib.pyplot as plt
