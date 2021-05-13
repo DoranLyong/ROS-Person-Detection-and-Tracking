@@ -1,4 +1,4 @@
-# Person Detection and Tracking (Python) - onging 
+# Person Detection and Tracking (Python)
 
 ### Install requirements
 ```bash
