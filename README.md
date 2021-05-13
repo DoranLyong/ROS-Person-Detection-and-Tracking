@@ -1,6 +1,7 @@
-# ROS-Person-Detection-and-Tracking (ongoing...)
+# ROS-Person-Detection-and-Tracking 
 
-
+* In the ```python``` directory, you can test the modules with only python.
+* In the ```ROS``` directory, you can test the modules with [rospy](http://wiki.ros.org/rospy) ... (ongoing).
 
 
 
