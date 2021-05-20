@@ -42,34 +42,42 @@ def detect_emergency(imgs, task):
 
     """ Assembling data 
     """
-    cv_image1 = cv2.imread('1.png')
 
     my_msg = EmergencyDetecRequest()
+    print(f"image bus length: {len(my_msg.imgs)}")
 
     for idx, img in enumerate(imgs):
-        cv2.imshow("Before cv_bridge", img)
-        cv2.waitKey(0)
+
+        if len(my_msg.imgs) == idx: 
+            print("Maximum batch")
+            break
 
         my_msg.imgs[idx] = bridge.cv2_to_imgmsg(np.array(img), "bgr8")
+        
+
+    
 
 
-
-    """ Request 
+    """ Request & Response 
     """ 
     rospy.wait_for_service('fall_detection')
 
     try: 
-        pass 
+        fall_detect = rospy.ServiceProxy('fall_detection', EmergencyDetec)
+
+        print(f"Requesting...")
+
+        # service call 
+        res = fall_detect.call(my_msg)
+
+        # service Response
+        print(f"Responsed:")
+        print(f"Task is : {res.task}")
+        print(f"State is : {res.state}")
 
 
     except rospy.ServiceException as e:
-        print(f"Service call failed: {e}")
-
-
-
-
-    cv2.imshow("test", imgs[0])
-    cv2.waitKey(0)
+        print(f"Service call failed: {e}")        
 
 
 
@@ -80,6 +88,7 @@ if __name__ == "__main__":
 
     cv_image1 = cv2.imread('1.png')
     cv_image2 = cv2.imread('2.png')
+    
 
     samples = [cv_image1, cv_image2]
 

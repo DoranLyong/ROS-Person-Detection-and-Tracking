@@ -1,4 +1,5 @@
 rospkg
+netifaces
 numpy 
 colorama
 PyYAML
