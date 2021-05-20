@@ -1,0 +1,6 @@
+sensor_msgs/Image[2] imgs
+int8[] bboxes
+
+---
+string task 
+bool state 
