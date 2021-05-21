@@ -1,0 +1,36 @@
+CAPTURE_OPTIONS:
+  NUM_IMG : 10 # the number of images for capturing 
+  PID : 0   # person ID = target ID 
+  FILE_NAME : 'PATIENT'  # target name (write in captital letters)
+  TYPE : 't3'  # t0, t1, t2, ... 
+
+
+  dataPath:
+    GALLERY_IMG_DIR : 'data/IMGs/gallery' 
+  
+
+
+YOLO4_TINY:
+  FRAMEWORK : 'tflite'
+  WEIGHTS : 'checkpoints/yolov4-tiny-416.tflite'  # path to weights file 
+  SIZE: 416  # resize images to 
+  MODEL: 'yolov4'
+  IoU : 0.45  # iou threshold 
+  SCORE : 0.75  # threshold 
+  TINY : true   # 'yolo-tiny moodel'
+
+DeepSORT:
+  WEIGHTS : 'DeepSORT_data/mars-small128.pb'
+  MAX_COSINE_DISTANCE : 0.4
+  NN_BUDGET : null
+  NMS_MAX_OVERLAP : 1.0
+  COUNT: True   # 'count objects being tracked on screen'
+  INFO: False    # 'show detailed info of tracked objects'
+  DONT_SHOW : False # 'dont show video output'
+
+
+
+
+
+CAMERA:
+  NUM : 0  # camera device number 
