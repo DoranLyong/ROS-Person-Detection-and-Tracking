@@ -57,15 +57,14 @@ def detect_emergency(imgs, task):
 
         my_msg.imgs[idx] = bridge.cv2_to_imgmsg(np.array(img), "bgr8")
         
-        coordi = np.random.rand(4,1) # example bbox: x1, y1, x2, y2 - order 
+        coordi = [0, 1,  2 , 3]     # example bbox: x1, y1, x2, y2 - order 
         bbox.extend(coordi)         # (ref) https://answers.ros.org/question/325559/how-can-we-actually-use-float32multiarray-to-publish-2d-array-using-python/
 
+        
+    print("Test bbox sequence: ", bbox)  # (ref) https://stackoverflow.com/questions/31369934/ros-publishing-array-from-python-node
 
     my_msg.bboxes = bbox
     print(my_msg.bboxes)
-
-    np_bbox = np.asarray(my_msg.bboxes).reshape(-1, 4)
-    print(np_bbox)
         
 
 
