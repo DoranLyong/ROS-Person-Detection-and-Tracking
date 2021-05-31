@@ -1,5 +1,5 @@
 sensor_msgs/Image[2] imgs
-int8[] bboxes
+int32[] bboxes
 
 ---
 string task 
