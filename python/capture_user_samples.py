@@ -85,8 +85,8 @@ else:
 
 
 
-def check_existdir(path):
-    file_list = os.listdir(path)
+def check_existdir(path, target_name):
+    file_list = [file for file in os.listdir(path) if file.__contains__(target_name)]
 
     if len(file_list): 
         file_list.sort()   #(ref) https://wikidocs.net/16041
@@ -105,7 +105,7 @@ def check_existdir(path):
 def run(yolo_module, vid):
     
     path = f'{GALLERY_DIR}'
-    frame_id = check_existdir(path)   # return starting frame number 
+    frame_id = check_existdir(path,  TARGET_NAME)   # return starting frame number 
     print(f"Start frame ID at :{frame_id }")    
     frame_count = 0 
 
