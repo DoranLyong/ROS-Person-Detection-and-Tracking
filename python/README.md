@@ -32,7 +32,7 @@
 
 ### 2. ID enrollment 
 ```bash 
-~$ enrollment_persons.py
+~$ python enrollment_persons.py
 ``` 
 
 
